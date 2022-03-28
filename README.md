@@ -1,7 +1,9 @@
 # Portfolio-Performance-ETF-Import
 additional tool to automatically import ETF data into classifications
 
-**(PP = Portfolio Performance)**
+(PP = Portfolio Performance)
+
+**_Java erforderlich!_**
 
 english version missing;
 

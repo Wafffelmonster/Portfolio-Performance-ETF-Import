@@ -1,13 +1,13 @@
-package taxoImport;
+package models;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.w3c.dom.Node;
+import static utils.StringUtils.containsIgnoreCase;
 
-public class ETF {
+public class Security {
 
 	public class PercentageUsedTuple {
 		public PercentageUsedTuple(Double dOthers, boolean b) {
@@ -18,7 +18,6 @@ public class ETF {
 		Boolean fIsUsed;
 	}
 	
-	
 
 	private String strName;
 	private String strISIN;
@@ -28,7 +27,7 @@ public class ETF {
 	private Map<String, PercentageUsedTuple> oListForInstruments = new HashMap<String, PercentageUsedTuple>();
 	private Map<String, PercentageUsedTuple> oListForCountries = new HashMap<String, PercentageUsedTuple>();
 
-	public ETF(String isin) {
+	public Security(String isin) {
 		this.strISIN = isin;
 	}
 
@@ -43,16 +42,12 @@ public class ETF {
 	/*
 	 * setter
 	 */
-	/**
-	 * @param Map
-	 *            <String, Double>
-	 */
 	public void setBranches(Map<String, PercentageUsedTuple> oBranches) {
 		List<String> toRemove = new ArrayList<String>();
 		Map<String, PercentageUsedTuple> toAdd = new HashMap<String, PercentageUsedTuple>();
 		for(Map.Entry<String, PercentageUsedTuple> entry : oBranches.entrySet()){
 			String strKey = entry.getKey();
-			if(Main.containsIgnoreCase(strKey, "service")){
+			if(containsIgnoreCase(strKey, "service")){
 				toRemove.add(strKey);
 				strKey = strKey.toLowerCase().replaceAll("services", "dienste");
 				strKey = strKey.toLowerCase().replaceAll("service", "dienste");
@@ -69,37 +64,21 @@ public class ETF {
 		//setRest(this.oListForBranches);
 	}
 
-	/**
-	 * @param Map
-	 *            <String, Double>
-	 */
 	public void setHoldings(Map<String, PercentageUsedTuple> oHoldings) {
 		this.oListForHoldings = oHoldings;
 		//setRest(this.oListForHoldings);
 	}
 
-	/**
-	 * @param Map
-	 *            <String, Double>
-	 */
 	public void setCurrencies(Map<String, PercentageUsedTuple> oCurrencies) {
 		this.oListForCurrencies = oCurrencies;
 		//setRest(this.oListForCurrencies);
 	}
 
-	/**
-	 * @param Map
-	 *            <String, Double>
-	 */
 	public void setInstruments(Map<String, PercentageUsedTuple> oInstruments) {
 		this.oListForInstruments = oInstruments;
 		//setRest(this.oListForInstruments);
 	}
 
-	/**
-	 * @param Map
-	 *            <String, Double>
-	 */
 	public void setCountries(Map<String, PercentageUsedTuple> oCountries) {
 		this.oListForCountries = oCountries;
 		setRest(this.oListForCountries);
